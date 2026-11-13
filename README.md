@@ -128,6 +128,8 @@ To work on the code instead, clone it and run `uv sync`, then use `uv run flatwa
 
 ## Setup
 
+> **Setting it up with an AI assistant?** Give [`assistant_instructions.md`](assistant_instructions.md) to Claude (or another coding assistant). It walks the assistant through every step below, including when to stop and ask you about your criteria or have you log in, plus the safety rules it must keep and fixes for common problems. For example: *"Read assistant_instructions.md and set up flatwatch for me."*
+
 ```bash
 flatwatch init                    # creates ~/.flatwatch/config.yaml and ~/.flatwatch/.env
 ```
