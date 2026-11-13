@@ -122,4 +122,4 @@ def test_stub_without_content_dropped():
 
 def test_helpers():
     assert group_slug("https://www.facebook.com/groups/flatsandflatmates/") == "flatsandflatmates"
-    assert clean_title("(12) Flats and Flatmates Bangalore | Facebook") == "Flats and Flatmates Bangalore"
+    assert clean_title("(12) Example Rentals Group | Facebook") == "Example Rentals Group"
