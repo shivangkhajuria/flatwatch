@@ -1,0 +1,17 @@
+.env
+config.yaml
+fixtures/
+evals/labeled.jsonl
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+evals/corpus.jsonl
+evals/runs/
+*.bak
+.env.*
+!src/flatwatch/templates/env.example
+# local build notes (contain personal details)
+PLAN.md
+CLAUDE_1.md
+.DS_Store

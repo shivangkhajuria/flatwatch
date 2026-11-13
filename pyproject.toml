@@ -1,0 +1,31 @@
+[project]
+name = "flatwatch"
+version = "0.1.0"
+description = "Watches Facebook groups and subreddits for flat / flatmate listings and sends the matching ones to Telegram"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "claude-agent-sdk>=0.2.180",
+    "httpx>=0.28.1",
+    "loguru>=0.8.0",
+    "playwright>=1.65.1",
+    "pydantic>=2.14.3",
+    "python-dotenv>=1.2.4",
+    "pyyaml>=6.0.3",
+    "rapidfuzz>=3.14.6",
+]
+
+[project.scripts]
+flatwatch = "flatwatch.cli:main"
+
+[build-system]
+requires = ["uv_build>=0.12.10,<0.13.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "pytest>=9.2.0",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

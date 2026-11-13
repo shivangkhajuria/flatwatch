@@ -1,0 +1,51 @@
+# flatwatch config. `flatwatch init` copies this to ~/.flatwatch/config.yaml; edit it there.
+# Secrets (Telegram token, chat id) and optionally your sources live in .env, not here.
+
+criteria:
+  localities:            # strict match; LLM normalises spelling to one of these
+    HSR:         [HSR, HSR Layout, HSR BDA Layout, Sector 1, Sector 2, Sector 3, Sector 4, Sector 5, Sector 6, Sector 7]
+    Indiranagar: [Indiranagar, Indira Nagar, HAL 2nd Stage, 100 Feet Road, 12th Main, CMH Road, Double Road]
+    Domlur:      [Domlur, Domlur Layout, Domlur 2nd Stage, EGL, Embassy Golf Links]
+  nearby_ok: []          # e.g. [Koramangala, Jeevan Bima Nagar, HAL 3rd Stage] -> sent as digest-only if added
+
+  tiers:
+    P1:                  # primary: whole 1BHK (studio also OK; 1RK is NOT)
+      offering_type: full_flat
+      unit: [1bhk, studio]
+      max_rent_inr: 30000
+    P2:                  # secondary: room in a shared flat, male flatmate
+      offering_type: [flatmate, replacement]
+      unit: [2bhk, 3bhk]
+      gender_pref: [male, any]      # "unknown" -> digest, not instant
+      private_bathroom: true        # "unknown" -> digest, not instant
+      max_rent_inr: 30000           # rent for the room on offer
+  budget_note: "stated range 20k–30k; listings under 20k are still alerted (cheaper is fine)"
+  over_budget_digest_pct: 15        # 30,001–34,500 -> digest
+  rent_unknown: drop                # drop | digest: what to do with posts that don't state a rent
+  bonus:
+    balcony: +1          # adds a tag and moves it up the digest; never required
+  exclude:
+    intent: [seeking]    # "looking for a flat" posts, about half the volume
+    offering_type: [pg_coliving]
+    unit: [1rk]
+    gender_pref: [female]
+  flag_brokers: true          # tag, don't drop
+
+sources:
+  # Which groups and subreddits to watch. Keep your real list out of git: either put it
+  # here (config.yaml is gitignored) or in .env as FLATWATCH_FACEBOOK_GROUPS /
+  # FLATWATCH_SUBREDDITS, which replace these lists when set.
+  facebook: []
+    # - https://www.facebook.com/groups/<group-id-or-slug>/
+  reddit: []
+    # - <SubredditName>
+
+extract:
+  backend: agent_sdk     # agent_sdk | anthropic_api
+  model: claude-haiku-5-5
+  batch_size: 15
+
+alerts:
+  max_age_hours: 24          # posts older than this never trigger an instant alert (protects the first run)
+  digest_times: ["09:00", "21:00"]   # IST
+  digest_max_age_days: 3
